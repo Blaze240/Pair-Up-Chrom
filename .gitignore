@@ -1,4 +1,4 @@
-**/target
+target
 **/*.py
 **/*.pyc
 Cargo.lock
