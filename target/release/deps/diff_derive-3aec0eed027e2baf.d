@@ -1,0 +1,5 @@
+C:\Users\jngu2\Videos\Ultimate Modding\Coding\TMS Chrom\TMS Chrom\target\release\deps\diff_derive-3aec0eed027e2baf.dll: C:\Users\jngu2\.cargo\registry\src\index.crates.io-6f17d22bba15001f\diff_derive-0.1.2\src\lib.rs
+
+C:\Users\jngu2\Videos\Ultimate Modding\Coding\TMS Chrom\TMS Chrom\target\release\deps\diff_derive-3aec0eed027e2baf.d: C:\Users\jngu2\.cargo\registry\src\index.crates.io-6f17d22bba15001f\diff_derive-0.1.2\src\lib.rs
+
+C:\Users\jngu2\.cargo\registry\src\index.crates.io-6f17d22bba15001f\diff_derive-0.1.2\src\lib.rs:
