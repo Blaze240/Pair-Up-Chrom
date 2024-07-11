@@ -68,7 +68,7 @@ unsafe extern "C" fn chrom_attacklw3(agent: &mut L2CAgentBase) {
         if PostureModule::lr(own_boma) < 0.0 {
             refletPosX[entry_id] = PostureModule::pos_x(own_boma) + 10.0;
             refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma);
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma)- 2.0;
 
             PostureModule::set_pos(
                 agent.module_accessor,
@@ -81,7 +81,7 @@ unsafe extern "C" fn chrom_attacklw3(agent: &mut L2CAgentBase) {
         } else {
             refletPosX[entry_id] = PostureModule::pos_x(own_boma) - 10.0;
             refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma);
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma)- 2.0;
 
             PostureModule::set_pos(
                 agent.module_accessor,

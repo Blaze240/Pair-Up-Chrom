@@ -42,28 +42,26 @@ unsafe extern "C" fn chrom_attacks4(agent: &mut L2CAgentBase) {
     let own_boma = sv_battle_object::module_accessor(entry_id as u32);
     if macros::is_excute(agent) {
         if PostureModule::lr(agent.module_accessor) < 0.0 {
-            refletPosX[entry_id] = PostureModule::pos_x(agent.module_accessor) - 9.0;
-            refletPosY[entry_id] = PostureModule::pos_y(agent.module_accessor);
-            refletPosZ[entry_id] = PostureModule::pos_z(agent.module_accessor);
+            refletPosX[entry_id] = PostureModule::pos_x(own_boma) + 3.5;
+            refletPosY[entry_id] = PostureModule::pos_y(own_boma) + 4.0;
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma)- 2.0;
 
-            ArticleModule::set_pos(
+            PostureModule::set_pos(
                 agent.module_accessor,
-                *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-                Vector3f {
+                &Vector3f {
                     x: refletPosX[entry_id],
                     y: refletPosY[entry_id],
                     z: refletPosZ[entry_id],
                 },
             );
         } else {
-            refletPosX[entry_id] = PostureModule::pos_x(agent.module_accessor) + 9.0;
-            refletPosY[entry_id] = PostureModule::pos_y(agent.module_accessor);
-            refletPosZ[entry_id] = PostureModule::pos_z(agent.module_accessor);
+            refletPosX[entry_id] = PostureModule::pos_x(own_boma) - 3.5;
+            refletPosY[entry_id] = PostureModule::pos_y(own_boma) + 4.0;
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma)- 2.0;
 
-            ArticleModule::set_pos(
+            PostureModule::set_pos(
                 agent.module_accessor,
-                *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-                Vector3f {
+                &Vector3f {
                     x: refletPosX[entry_id],
                     y: refletPosY[entry_id],
                     z: refletPosZ[entry_id],

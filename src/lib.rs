@@ -20,6 +20,7 @@ mod AttackS3;
 
 mod AttackLw4;
 mod AttackS4;
+mod AttackHi4;
 
 #[skyline::main(name = "chrom_pairup")]
 pub fn main() {
@@ -32,5 +33,6 @@ pub fn main() {
     AttackLw3::install();
 
     AttackS4::install();
+    AttackHi4::install();
     AttackLw4::install();
 }
