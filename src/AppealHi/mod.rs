@@ -30,6 +30,14 @@ unsafe extern "C" fn reflet_appealhi(agent: &mut L2CAgentBase) {
             -1.0,
         );
     }
+    frame(agent.lua_state_agent, 50.0);
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(
+            agent.module_accessor,
+            *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+            ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL),
+        );
+    }
 }
 
 unsafe extern "C" fn chrom_appealhi(agent: &mut L2CAgentBase) {
@@ -120,7 +128,7 @@ unsafe extern "C" fn chrom_effect_appealhi(agent: &mut L2CAgentBase) {
             true,
         );
     }
-    frame(agent.lua_state_agent, 87.0);
+    frame(agent.lua_state_agent, 49.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,

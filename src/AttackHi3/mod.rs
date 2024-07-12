@@ -62,6 +62,14 @@ unsafe extern "C" fn reflet_attackhi3(agent: &mut L2CAgentBase) {
             *BATTLE_OBJECT_ID_INVALID as u32,
         );
     }
+    frame(agent.lua_state_agent, 32.0);
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(
+            agent.module_accessor,
+            *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+            ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL),
+        );
+    }
 }
 
 unsafe extern "C" fn chrom_attackhi3(agent: &mut L2CAgentBase) {
@@ -102,7 +110,6 @@ unsafe extern "C" fn chrom_attackhi3(agent: &mut L2CAgentBase) {
 }
 
 unsafe extern "C" fn chrom_effect_attackhi3(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,
@@ -124,44 +131,16 @@ unsafe extern "C" fn chrom_effect_attackhi3(agent: &mut L2CAgentBase) {
             true,
         );
     }
-    frame(agent.lua_state_agent, 5.0);
-    macros::AFTER_IMAGE4_ON_arg29(
-        agent,
-        Hash40::new("tex_chrom_sword1"),
-        Hash40::new("tex_chrom_sword2"),
-        9,
-        Hash40::new("sword1"),
-        0,
-        0,
-        1.7,
-        Hash40::new("sword1"),
-        -0.0,
-        -0.0,
-        12.6,
-        true,
-        Hash40::new("chrom_sword"),
-        Hash40::new("sword1"),
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        *EFFECT_AXIS_X,
-        0,
-        *TRAIL_BLEND_ALPHA,
-        101,
-        *TRAIL_CULL_NONE,
-        1.2,
-        0.2,
-    );
-    frame(agent.lua_state_agent, 11.0);
+    frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::AFTER_IMAGE_OFF(agent, 4);
+        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("tex_chrom_sword1"), Hash40::new("tex_chrom_sword2"), 6, Hash40::new("sword1"), 0, 0, 1.65, Hash40::new("sword1"), -0.0, -0.0, 12.4, true, Hash40::new("chrom_sword"), Hash40::new("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.2, 0.2);
+        macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
-    frame(agent.lua_state_agent, 54.0);
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::AFTER_IMAGE_OFF(agent, 1);
+    }
+    frame(agent.lua_state_agent, 30.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,

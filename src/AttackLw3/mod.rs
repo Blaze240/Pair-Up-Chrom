@@ -52,6 +52,14 @@ unsafe extern "C" fn reflet_attacklw3(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
     }
+    frame(agent.lua_state_agent, 21.0);
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(
+            agent.module_accessor,
+            *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+            ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL),
+        );
+    }
     frame(agent.lua_state_agent, 33.0);
     if macros::is_excute(agent) {
         slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 10);
@@ -68,7 +76,7 @@ unsafe extern "C" fn chrom_attacklw3(agent: &mut L2CAgentBase) {
         if PostureModule::lr(own_boma) < 0.0 {
             refletPosX[entry_id] = PostureModule::pos_x(own_boma) + 10.0;
             refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma)- 2.0;
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 2.0;
 
             PostureModule::set_pos(
                 agent.module_accessor,
@@ -81,7 +89,7 @@ unsafe extern "C" fn chrom_attacklw3(agent: &mut L2CAgentBase) {
         } else {
             refletPosX[entry_id] = PostureModule::pos_x(own_boma) - 10.0;
             refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma)- 2.0;
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 2.0;
 
             PostureModule::set_pos(
                 agent.module_accessor,
@@ -96,7 +104,6 @@ unsafe extern "C" fn chrom_attacklw3(agent: &mut L2CAgentBase) {
 }
 
 unsafe extern "C" fn chrom_effect_attacklw3(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,
@@ -158,7 +165,7 @@ unsafe extern "C" fn chrom_effect_attacklw3(agent: &mut L2CAgentBase) {
         macros::AFTER_IMAGE_OFF(agent, 4);
     }
 
-    frame(agent.lua_state_agent, 51.0);
+    frame(agent.lua_state_agent, 19.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,

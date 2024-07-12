@@ -34,6 +34,87 @@ unsafe extern "C" fn reflet_attackhi4frame(agent: &mut L2CAgentBase) {
     }
 }
 
+unsafe extern "C" fn reflet_attackhi4(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    WorkModule::is_flag(
+        agent.module_accessor,
+        *FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_THUNDER_SWORD_ON,
+    );
+    if macros::is_excute(agent) {
+        AttackModule::set_attack_reference_joint_id(
+            agent.module_accessor,
+            Hash40::new("top"),
+            AttackDirectionAxis(*ATTACK_DIRECTION_Y),
+            AttackDirectionAxis(*ATTACK_DIRECTION_X),
+            AttackDirectionAxis(*ATTACK_DIRECTION_Z),
+        );
+    }
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::AREA_WIND_2ND_arg10(agent, 0, 1, 80, 300, 0.8, 0, 12, 24, 24, 80);
+    }
+    WorkModule::is_flag(
+        agent.module_accessor,
+        *FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_THUNDER_SWORD_ON,
+    );
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackl"), 0);
+        ControlModule::set_rumble(
+            agent.module_accessor,
+            Hash40::new("rbkind_nohitm"),
+            0,
+            false,
+            *BATTLE_OBJECT_ID_INVALID as u32,
+        );
+    }
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(
+            agent.module_accessor,
+            Hash40::new("rbkind_nohitl"),
+            0,
+            false,
+            *BATTLE_OBJECT_ID_INVALID as u32,
+        );
+    } else {
+        frame(agent.lua_state_agent, 11.0);
+        if macros::is_excute(agent) {
+            ControlModule::set_rumble(
+                agent.module_accessor,
+                Hash40::new("rbkind_nohitl"),
+                0,
+                false,
+                *BATTLE_OBJECT_ID_INVALID as u32,
+            );
+        }
+    }
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_pierces"), 0);
+    }
+    frame(agent.lua_state_agent, 18.0);
+    if macros::is_excute(agent) {
+        AreaModule::erase_wind(agent.module_accessor, 0);
+    }
+    frame(agent.lua_state_agent, 57.0);
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(
+            agent.module_accessor,
+            *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+            ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL),
+        );
+    }
+}
+
+
+
 unsafe extern "C" fn chrom_attackhi4(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(
         agent.module_accessor,
@@ -185,13 +266,9 @@ unsafe extern "C" fn chrom_effect_attackhi4(agent: &mut L2CAgentBase) {
         );
     }
 
-    frame(agent.lua_state_agent, 19.0);
+    frame(agent.lua_state_agent, 45.0);
     if macros::is_excute(agent) {
         macros::AFTER_IMAGE_OFF(agent, 4);
-    }
-
-    frame(agent.lua_state_agent, 74.0);
-    if macros::is_excute(agent) {
         macros::EFFECT(
             agent,
             Hash40::new("finreflet_warp"),
@@ -217,6 +294,8 @@ unsafe extern "C" fn chrom_effect_attackhi4(agent: &mut L2CAgentBase) {
 pub fn install() {
     Agent::new("reflet")
         .on_line(Main, reflet_attackhi4frame)
+        .expression_acmd("expression_attackhi4", reflet_attackhi4, Priority::Low)
+        .expression_acmd("expression_attackhi42", reflet_attackhi4, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_attackhi4", chrom_attackhi4, Priority::Low)

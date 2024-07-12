@@ -22,6 +22,12 @@ mod AttackLw4;
 mod AttackS4;
 mod AttackHi4;
 
+mod AttackAirN;
+mod AttackAirF;
+mod AttackAirB;
+mod AttackAirHi;
+mod AttackAirLw;
+
 #[skyline::main(name = "chrom_pairup")]
 pub fn main() {
     AppealHi::install();
@@ -35,4 +41,10 @@ pub fn main() {
     AttackS4::install();
     AttackHi4::install();
     AttackLw4::install();
+
+    //AttackAirN::install();
+    //AttackAirF::install();
+    //AttackAirB::install();
+    //AttackAirHi::install();
+    //AttackAirLw::install();
 }
