@@ -10,41 +10,18 @@
     clippy::borrow_interior_mutable_const
 )]
 
-mod AppealHi;
-mod AppealLw;
-mod AppealS;
+mod taunts;
+mod tilts;
+mod smash_attacks;
+mod aerials;
 
-mod AttackHi3;
-mod AttackLw3;
-mod AttackS3;
-
-mod AttackLw4;
-mod AttackS4;
-mod AttackHi4;
-
-mod AttackAirN;
-mod AttackAirF;
-mod AttackAirB;
-mod AttackAirHi;
-mod AttackAirLw;
 
 #[skyline::main(name = "chrom_pairup")]
 pub fn main() {
-    AppealHi::install();
-    AppealS::install();
-    AppealLw::install();
 
-    AttackS3::install();
-    AttackHi3::install();
-    AttackLw3::install();
-
-    AttackS4::install();
-    AttackHi4::install();
-    AttackLw4::install();
-
-    //AttackAirN::install();
-    //AttackAirF::install();
-    //AttackAirB::install();
-    //AttackAirHi::install();
-    //AttackAirLw::install();
+    taunts::install();
+    tilts::install();
+    smash_attacks::install();
+    aerials::install();
+   
 }

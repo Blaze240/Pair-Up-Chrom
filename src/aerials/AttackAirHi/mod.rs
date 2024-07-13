@@ -10,10 +10,6 @@ use {
     smashline::*,
 };
 
-static mut refletPosX: [f32; 8] = [0.0; 8];
-static mut refletPosY: [f32; 8] = [0.0; 8];
-static mut refletPosZ: [f32; 8] = [0.0; 8];
-
 unsafe extern "C" fn reflet_attackairhi(agent: &mut L2CAgentBase) {
     WorkModule::is_flag(
         agent.module_accessor,
@@ -51,7 +47,7 @@ unsafe extern "C" fn reflet_attackairhi(agent: &mut L2CAgentBase) {
             *BATTLE_OBJECT_ID_INVALID as u32,
         );
     }
-    execute(agent.lua_state_agent, 10.0);
+    frame(agent.lua_state_agent, 10.0);
     WorkModule::is_flag(
         agent.module_accessor,
         *FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_THUNDER_SWORD_ON,
@@ -63,7 +59,7 @@ unsafe extern "C" fn reflet_attackairhi(agent: &mut L2CAgentBase) {
             macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
         }
     }
-    frame(agent.lua_state_agent, 56.0);
+    frame(agent.lua_state_agent, 45.0);
     if macros::is_excute(agent) {
         ArticleModule::remove_exist(
             agent.module_accessor,
@@ -72,6 +68,8 @@ unsafe extern "C" fn reflet_attackairhi(agent: &mut L2CAgentBase) {
         );
     }
 }
+
+
 unsafe extern "C" fn chrom_attackairhi(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(
         agent.module_accessor,
@@ -99,16 +97,22 @@ unsafe extern "C" fn chrom_attackairhi(agent: &mut L2CAgentBase) {
                 },
             );
         } else {
-            refletPosX[entry_id] = PostureModule::pos_x(own_boma) - 2.0;
-            refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 2.0;
-
-            PostureModule::set_pos(
+            LinkModule::set_model_constraint_pos_ort(
+                agent.module_accessor,
+                *LINK_NO_CONSTRAINT,
+                Hash40::new("top"),
+                Hash40::new("top"),
+                (*CONSTRAINT_FLAG_ORIENTATION
+                    | *CONSTRAINT_FLAG_POSITION
+                    | *CONSTRAINT_FLAG_OFFSET_TRANSLATE) as u32,
+                true,
+            );
+            LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: refletPosX[entry_id],
-                    y: refletPosY[entry_id],
-                    z: refletPosZ[entry_id],
+                    x: -5.0,
+                    y: 4.0,
+                    z: -10.0,
                 },
             );
         }
@@ -177,7 +181,7 @@ unsafe extern "C" fn chrom_effect_attackairhi(agent: &mut L2CAgentBase) {
         macros::AFTER_IMAGE_OFF(agent, 3);
     }
 
-    frame(agent.lua_state_agent, 55.0);
+    frame(agent.lua_state_agent, 43.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,
