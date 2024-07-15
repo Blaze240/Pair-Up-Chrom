@@ -112,7 +112,7 @@ unsafe extern "C" fn chrom_attackairhi(agent: &mut L2CAgentBase) {
                 &Vector3f {
                     x: -5.0,
                     y: 4.0,
-                    z: -10.0,
+                    z: -5.0,
                 },
             );
         }

@@ -1,6 +1,4 @@
-# lily-srs-template
-#### A blank template for creating SSBU code mods
+# Pair Up Chrom 
+Skyline visual plugin which incorporates Robin's Chrom article and spawns him with normal moves and aerials. Includes Chrom's default animations and retargeted ones to better match Robin's. Also reincorporates Chrom's default effects for each attack. 
 
-Clone standard SL2 template: `git clone https://github.com/LilyLavender/lily-srs-template`
-
-Clone legacy SL1 template: `git clone https://github.com/LilyLavender/lily-srs-template -b sl1`
+#### General Changes

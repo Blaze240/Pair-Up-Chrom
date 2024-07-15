@@ -10,18 +10,17 @@
     clippy::borrow_interior_mutable_const
 )]
 
+mod aerials;
+mod landing;
+mod smash_attacks;
 mod taunts;
 mod tilts;
-mod smash_attacks;
-mod aerials;
-
 
 #[skyline::main(name = "chrom_pairup")]
 pub fn main() {
-
     taunts::install();
     tilts::install();
     smash_attacks::install();
     aerials::install();
-   
+    landing::install();
 }
