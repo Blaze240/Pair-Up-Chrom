@@ -10,11 +10,7 @@ use {
     smashline::*,
 };
 
-unsafe extern "C" fn reflet_attackairn(agent: &mut L2CAgentBase) {
-    WorkModule::is_flag(
-        agent.module_accessor,
-        *FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_THUNDER_SWORD_ON,
-    );
+unsafe extern "C" fn reflet_attacks3(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ArticleModule::generate_article(
             agent.module_accessor,
@@ -25,7 +21,7 @@ unsafe extern "C" fn reflet_attackairn(agent: &mut L2CAgentBase) {
         ArticleModule::change_motion(
             agent.module_accessor,
             *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-            Hash40::new("attack_air_n"),
+            Hash40::new("attack_s3"),
             false,
             -1.0,
         );
@@ -36,6 +32,8 @@ unsafe extern "C" fn reflet_attackairn(agent: &mut L2CAgentBase) {
             AttackDirectionAxis(*ATTACK_DIRECTION_Y),
             AttackDirectionAxis(*ATTACK_DIRECTION_X),
         );
+        ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
@@ -48,29 +46,10 @@ unsafe extern "C" fn reflet_attackairn(agent: &mut L2CAgentBase) {
         );
     }
     frame(agent.lua_state_agent, 9.0);
-    execute(agent.lua_state_agent, 9.0);
-    WorkModule::is_flag(
-        agent.module_accessor,
-        *FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_THUNDER_SWORD_ON,
-    );
     if macros::is_excute(agent) {
-        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashl"), 0);
-    } else {
-        if macros::is_excute(agent) {
-            macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
-        }
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
     }
-    frame(agent.lua_state_agent, 22.0);
-    if macros::is_excute(agent) {
-        ControlModule::set_rumble(
-            agent.module_accessor,
-            Hash40::new("rbkind_nohitm"),
-            0,
-            false,
-            *BATTLE_OBJECT_ID_INVALID as u32,
-        );
-    }
-    frame(agent.lua_state_agent, 49.0);
+    frame(agent.lua_state_agent, 32.0);
     if macros::is_excute(agent) {
         ArticleModule::remove_exist(
             agent.module_accessor,
@@ -80,7 +59,7 @@ unsafe extern "C" fn reflet_attackairn(agent: &mut L2CAgentBase) {
     }
 }
 
-unsafe extern "C" fn chrom_attackairn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_attacks3(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(
         agent.module_accessor,
         *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID,
@@ -103,7 +82,7 @@ unsafe extern "C" fn chrom_attackairn(agent: &mut L2CAgentBase) {
                 &Vector3f {
                     x: -5.0,
                     y: 4.0,
-                    z: -5.0,
+                    z: -7.0,
                 },
             );
         } else {
@@ -120,16 +99,16 @@ unsafe extern "C" fn chrom_attackairn(agent: &mut L2CAgentBase) {
             LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: -5.0,
+                    x: 5.0,
                     y: 4.0,
-                    z: -5.0,
+                    z: -7.0,
                 },
             );
         }
     }
 }
 
-unsafe extern "C" fn chrom_effect_attackairn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_effect_attacks3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
@@ -184,50 +163,12 @@ unsafe extern "C" fn chrom_effect_attackairn(agent: &mut L2CAgentBase) {
             0.2,
         );
     }
-    frame(agent.lua_state_agent, 12.0);
+    frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         macros::AFTER_IMAGE_OFF(agent, 4);
     }
-    frame(agent.lua_state_agent, 20.0);
-    if macros::is_excute(agent) {
-        macros::AFTER_IMAGE4_ON_arg29(
-            agent,
-            Hash40::new("tex_chrom_sword1"),
-            Hash40::new("tex_chrom_sword2"),
-            9,
-            Hash40::new("sword1"),
-            0,
-            0,
-            1.7,
-            Hash40::new("sword1"),
-            -0.0,
-            -0.0,
-            12.6,
-            true,
-            Hash40::new("chrom_sword"),
-            Hash40::new("sword1"),
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            1,
-            0,
-            *EFFECT_AXIS_X,
-            0,
-            *TRAIL_BLEND_ALPHA,
-            101,
-            *TRAIL_CULL_NONE,
-            1.2,
-            0.2,
-        );
-    }
-    frame(agent.lua_state_agent, 26.0);
-    if macros::is_excute(agent) {
-        macros::AFTER_IMAGE_OFF(agent, 4);
-    }
-    frame(agent.lua_state_agent, 45.0);
+
+    frame(agent.lua_state_agent, 30.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
             agent,
@@ -253,10 +194,10 @@ unsafe extern "C" fn chrom_effect_attackairn(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .expression_acmd("expression_attackairn", reflet_attackairn, Priority::Low)
+        .expression_acmd("expression_attacks3", reflet_attacks3, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
-        .game_acmd("game_attackairn", chrom_attackairn, Priority::Low)
-        .effect_acmd("effect_attackairn", chrom_effect_attackairn, Priority::Low)
+        .game_acmd("game_attacks3", chrom_attacks3, Priority::Low)
+        .effect_acmd("effect_attacks3", chrom_effect_attacks3, Priority::Low)
         .install();
 }

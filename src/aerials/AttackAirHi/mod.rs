@@ -69,7 +69,6 @@ unsafe extern "C" fn reflet_attackairhi(agent: &mut L2CAgentBase) {
     }
 }
 
-
 unsafe extern "C" fn chrom_attackairhi(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(
         agent.module_accessor,

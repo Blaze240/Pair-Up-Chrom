@@ -14,12 +14,12 @@ mod aerials;
 mod landing;
 mod smash_attacks;
 mod taunts;
-mod tilts;
+mod grounded;
 
 #[skyline::main(name = "chrom_pairup")]
 pub fn main() {
     taunts::install();
-    tilts::install();
+    grounded::install();
     smash_attacks::install();
     aerials::install();
     landing::install();
