@@ -104,7 +104,7 @@ unsafe extern "C" fn chrom_attackairlw(agent: &mut L2CAgentBase) {
             LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: -5.0,
+                    x: 5.0,
                     y: 4.0,
                     z: -5.0,
                 },
