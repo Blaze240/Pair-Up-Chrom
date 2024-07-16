@@ -192,7 +192,6 @@ unsafe extern "C" fn chrom_effect_attackdash(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::AFTER_IMAGE_OFF(agent, 4);
     }
-
     frame(agent.lua_state_agent, 39.0);
     if macros::is_excute(agent) {
         macros::EFFECT(

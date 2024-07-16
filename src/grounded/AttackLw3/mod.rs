@@ -127,22 +127,26 @@ unsafe extern "C" fn chrom_effect_attacklw3(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::AFTER_IMAGE4_ON_arg29(
+        macros::EFFECT_FOLLOW(
             agent,
-            Hash40::new("tex_chrom_sword1"),
-            Hash40::new("tex_chrom_sword2"),
-            9,
-            Hash40::new("sword1"),
-            0,
-            0,
-            1.7,
+            Hash40::new("chrom_sword_green"),
             Hash40::new("sword1"),
             -0.0,
-            -0.0,
-            12.6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
             true,
-            Hash40::new("chrom_sword"),
-            Hash40::new("sword1"),
+        );
+    }
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(
+            agent,
+            Hash40::new("sys_h_smoke_a"),
+            Hash40::new("top"),
             0,
             0,
             0,
@@ -151,20 +155,32 @@ unsafe extern "C" fn chrom_effect_attacklw3(agent: &mut L2CAgentBase) {
             0,
             1,
             0,
-            *EFFECT_AXIS_X,
             0,
-            *TRAIL_BLEND_ALPHA,
-            101,
-            *TRAIL_CULL_NONE,
-            1.2,
-            0.2,
+            0,
+            0,
+            0,
+            0,
+            false,
         );
+        macros::EFFECT_FOLLOW(
+            agent,
+            Hash40::new("chrom_mc_3lw"),
+            Hash40::new("top"),
+            -0.0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            true,
+        );
+        EffectModule::set_disable_render_offset_last(agent.module_accessor);
     }
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
-        macros::AFTER_IMAGE_OFF(agent, 4);
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("chrom_sword_green"), false, true);
     }
-
     frame(agent.lua_state_agent, 19.0);
     if macros::is_excute(agent) {
         macros::EFFECT(
