@@ -104,7 +104,7 @@ unsafe extern "C" fn chrom_effect_landingairf(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .game_acmd("game_landingairf", reflet_landingairf, Priority::Low)
+        .game_acmd("game_landingairf_pairup", reflet_landingairf, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_landingairf", chrom_landingairf, Priority::Low)

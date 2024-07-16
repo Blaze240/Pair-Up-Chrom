@@ -166,7 +166,7 @@ unsafe extern "C" fn chrom_effect_attackhi3(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .expression_acmd("expression_attackhi3", reflet_attackhi3, Priority::Low)
+        .expression_acmd("expression_attackhi3_pairup", reflet_attackhi3, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_attackhi3", chrom_attackhi3, Priority::Low)

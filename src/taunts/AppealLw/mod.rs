@@ -148,8 +148,8 @@ unsafe extern "C" fn chrom_effect_appeallw(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .game_acmd("game_appeallwl", reflet_appeallw, Priority::Low)
-        .game_acmd("game_appeallwr", reflet_appeallw, Priority::Low)
+        .game_acmd("game_appeallwl_pairup", reflet_appeallw, Priority::Low)
+        .game_acmd("game_appeallwr_pairup", reflet_appeallw, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_appeallwl", chrom_appeallw, Priority::Low)

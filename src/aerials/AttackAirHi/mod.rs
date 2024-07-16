@@ -206,7 +206,7 @@ unsafe extern "C" fn chrom_effect_attackairhi(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .expression_acmd("expression_attackairhi", reflet_attackairhi, Priority::Low)
+        .expression_acmd("expression_attackairhi_pairup", reflet_attackairhi, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_attackairhi", chrom_attackairhi, Priority::Low)

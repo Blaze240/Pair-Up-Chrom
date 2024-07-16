@@ -169,8 +169,8 @@ unsafe extern "C" fn chrom_effect_appeals(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .game_acmd("game_appealsl", reflet_appeals, Priority::Low)
-        .game_acmd("game_appealsr", reflet_appeals, Priority::Low)
+        .game_acmd("game_appealsl_pairup", reflet_appeals, Priority::Low)
+        .game_acmd("game_appealsr_pairup", reflet_appeals, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_appealsl", chrom_appeals, Priority::Low)

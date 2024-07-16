@@ -253,7 +253,7 @@ unsafe extern "C" fn chrom_effect_attackairn(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .expression_acmd("expression_attackairn", reflet_attackairn, Priority::Low)
+        .expression_acmd("expression_attackairn_pairup", reflet_attackairn, Priority::Low)
         .install();
     Agent::new("reflet_chrom")
         .game_acmd("game_attackairn", chrom_attackairn, Priority::Low)

@@ -15,21 +15,24 @@ static mut refletPosY: [f32; 8] = [0.0; 8];
 static mut refletPosZ: [f32; 8] = [0.0; 8];
 
 unsafe extern "C" fn reflet_attackhi4frame(agent: &mut L2CAgentBase) {
+    let slot_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     unsafe {
-        if MotionModule::motion_kind(agent.module_accessor) == hash40("attack_hi4_hold") {
-            ArticleModule::generate_article(
-                agent.module_accessor,
-                *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-                false,
-                -1,
-            );
-            ArticleModule::change_motion(
-                agent.module_accessor,
-                *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-                Hash40::new("attack_hi4"),
-                false,
-                -1.0,
-            );
+        if slot_id == 2 {
+            if MotionModule::motion_kind(agent.module_accessor) == hash40("attack_hi4_hold") {
+                ArticleModule::generate_article(
+                    agent.module_accessor,
+                    *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+                    false,
+                    -1,
+                );
+                ArticleModule::change_motion(
+                    agent.module_accessor,
+                    *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+                    Hash40::new("attack_hi4"),
+                    false,
+                    -1.0,
+                );
+            }
         }
     }
 }
@@ -113,8 +116,6 @@ unsafe extern "C" fn reflet_attackhi4(agent: &mut L2CAgentBase) {
     }
 }
 
-
-
 unsafe extern "C" fn chrom_attackhi4(agent: &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(
         agent.module_accessor,
@@ -125,7 +126,7 @@ unsafe extern "C" fn chrom_attackhi4(agent: &mut L2CAgentBase) {
         if PostureModule::lr(agent.module_accessor) < 0.0 {
             refletPosX[entry_id] = PostureModule::pos_x(own_boma) + 2.0;
             refletPosY[entry_id] = PostureModule::pos_y(own_boma) + 4.0;
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 2.0;
+            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 3.5;
 
             PostureModule::set_pos(
                 agent.module_accessor,

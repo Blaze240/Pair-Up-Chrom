@@ -15,21 +15,24 @@ static mut refletPosY: [f32; 8] = [0.0; 8];
 static mut refletPosZ: [f32; 8] = [0.0; 8];
 
 unsafe extern "C" fn reflet_attacklw4frame(agent: &mut L2CAgentBase) {
+    let slot_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     unsafe {
-        if MotionModule::motion_kind(agent.module_accessor) == hash40("attack_lw4_hold") {
-            ArticleModule::generate_article(
-                agent.module_accessor,
-                *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-                false,
-                -1,
-            );
-            ArticleModule::change_motion(
-                agent.module_accessor,
-                *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
-                Hash40::new("attack_lw4"),
-                false,
-                -1.0,
-            );
+        if slot_id == 2 {
+            if MotionModule::motion_kind(agent.module_accessor) == hash40("attack_lw4_hold") {
+                ArticleModule::generate_article(
+                    agent.module_accessor,
+                    *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+                    false,
+                    -1,
+                );
+                ArticleModule::change_motion(
+                    agent.module_accessor,
+                    *FIGHTER_REFLET_GENERATE_ARTICLE_CHROM,
+                    Hash40::new("attack_lw4"),
+                    false,
+                    -1.0,
+                );
+            }
         }
     }
 }

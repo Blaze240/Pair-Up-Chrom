@@ -22,6 +22,6 @@ unsafe extern "C" fn reflet_landingheavy(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("reflet")
-        .game_acmd("game_landingheavy", reflet_landingheavy, Priority::Low)
+        .game_acmd("game_landingheavy_pairup", reflet_landingheavy, Priority::Low)
         .install();
 }
