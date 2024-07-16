@@ -15,6 +15,7 @@ mod landing;
 mod smash_attacks;
 mod taunts;
 mod grounded;
+mod damage;
 
 #[skyline::main(name = "chrom_pairup")]
 pub fn main() {
@@ -23,4 +24,5 @@ pub fn main() {
     smash_attacks::install();
     aerials::install();
     landing::install();
+    damage::install();
 }
