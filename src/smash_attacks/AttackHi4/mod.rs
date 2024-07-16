@@ -10,14 +10,10 @@ use {
     smashline::*,
 };
 
-static mut refletPosX: [f32; 8] = [0.0; 8];
-static mut refletPosY: [f32; 8] = [0.0; 8];
-static mut refletPosZ: [f32; 8] = [0.0; 8];
-
 unsafe extern "C" fn reflet_attackhi4frame(agent: &mut L2CAgentBase) {
     let slot_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     unsafe {
-        if slot_id == 2 {
+        if slot_id == 2|| slot_id == 3 {
             if MotionModule::motion_kind(agent.module_accessor) == hash40("attack_hi4_hold") {
                 ArticleModule::generate_article(
                     agent.module_accessor,
@@ -123,30 +119,42 @@ unsafe extern "C" fn chrom_attackhi4(agent: &mut L2CAgentBase) {
     ) as usize;
     let own_boma = sv_battle_object::module_accessor(entry_id as u32);
     if macros::is_excute(agent) {
-        if PostureModule::lr(agent.module_accessor) < 0.0 {
-            refletPosX[entry_id] = PostureModule::pos_x(own_boma) + 2.0;
-            refletPosY[entry_id] = PostureModule::pos_y(own_boma) + 4.0;
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 3.5;
-
-            PostureModule::set_pos(
+        if PostureModule::lr(own_boma) < 0.0 {
+            LinkModule::set_model_constraint_pos_ort(
+                agent.module_accessor,
+                *LINK_NO_CONSTRAINT,
+                Hash40::new("top"),
+                Hash40::new("top"),
+                (*CONSTRAINT_FLAG_ORIENTATION
+                    | *CONSTRAINT_FLAG_POSITION
+                    | *CONSTRAINT_FLAG_OFFSET_TRANSLATE) as u32,
+                true,
+            );
+            LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: refletPosX[entry_id],
-                    y: refletPosY[entry_id],
-                    z: refletPosZ[entry_id],
+                    x: -5.0,
+                    y: 4.0,
+                    z: -7.0,
                 },
             );
         } else {
-            refletPosX[entry_id] = PostureModule::pos_x(own_boma) - 2.0;
-            refletPosY[entry_id] = PostureModule::pos_y(own_boma) + 4.0;
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma) - 2.0;
-
-            PostureModule::set_pos(
+            LinkModule::set_model_constraint_pos_ort(
+                agent.module_accessor,
+                *LINK_NO_CONSTRAINT,
+                Hash40::new("top"),
+                Hash40::new("top"),
+                (*CONSTRAINT_FLAG_ORIENTATION
+                    | *CONSTRAINT_FLAG_POSITION
+                    | *CONSTRAINT_FLAG_OFFSET_TRANSLATE) as u32,
+                true,
+            );
+            LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: refletPosX[entry_id],
-                    y: refletPosY[entry_id],
-                    z: refletPosZ[entry_id],
+                    x: 5.0,
+                    y: 4.0,
+                    z: -7.0,
                 },
             );
         }

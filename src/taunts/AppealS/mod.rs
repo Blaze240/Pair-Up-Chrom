@@ -10,10 +10,6 @@ use {
     smashline::*,
 };
 
-static mut refletPosX: [f32; 8] = [0.0; 8];
-static mut refletPosY: [f32; 8] = [0.0; 8];
-static mut refletPosZ: [f32; 8] = [0.0; 8];
-
 unsafe extern "C" fn reflet_appeals(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ArticleModule::generate_article(
@@ -48,29 +44,41 @@ unsafe extern "C" fn chrom_appeals(agent: &mut L2CAgentBase) {
     let own_boma = sv_battle_object::module_accessor(entry_id as u32);
     if macros::is_excute(agent) {
         if PostureModule::lr(own_boma) < 0.0 {
-            refletPosX[entry_id] = PostureModule::pos_x(own_boma) - 10.0;
-            refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma);
-
-            PostureModule::set_pos(
+            LinkModule::set_model_constraint_pos_ort(
+                agent.module_accessor,
+                *LINK_NO_CONSTRAINT,
+                Hash40::new("top"),
+                Hash40::new("top"),
+                (*CONSTRAINT_FLAG_ORIENTATION
+                    | *CONSTRAINT_FLAG_POSITION
+                    | *CONSTRAINT_FLAG_OFFSET_TRANSLATE) as u32,
+                true,
+            );
+            LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: refletPosX[entry_id],
-                    y: refletPosY[entry_id],
-                    z: refletPosZ[entry_id],
+                    x: -5.0,
+                    y: 0.0,
+                    z: 10.0,
                 },
             );
         } else {
-            refletPosX[entry_id] = PostureModule::pos_x(own_boma) + 10.0;
-            refletPosY[entry_id] = PostureModule::pos_y(own_boma);
-            refletPosZ[entry_id] = PostureModule::pos_z(own_boma);
-
-            PostureModule::set_pos(
+            LinkModule::set_model_constraint_pos_ort(
+                agent.module_accessor,
+                *LINK_NO_CONSTRAINT,
+                Hash40::new("top"),
+                Hash40::new("top"),
+                (*CONSTRAINT_FLAG_ORIENTATION
+                    | *CONSTRAINT_FLAG_POSITION
+                    | *CONSTRAINT_FLAG_OFFSET_TRANSLATE) as u32,
+                true,
+            );
+            LinkModule::set_constraint_translate_offset(
                 agent.module_accessor,
                 &Vector3f {
-                    x: refletPosX[entry_id],
-                    y: refletPosY[entry_id],
-                    z: refletPosZ[entry_id],
+                    x: 5.0,
+                    y: 0.0,
+                    z: 10.0,
                 },
             );
         }
