@@ -134,7 +134,7 @@ unsafe extern "C" fn chrom_attacklw4(agent: &mut L2CAgentBase) {
                 agent.module_accessor,
                 &Vector3f {
                     x: -5.0,
-                    y: 4.0,
+                    y: 0.0,
                     z: -7.0,
                 },
             );
@@ -153,7 +153,7 @@ unsafe extern "C" fn chrom_attacklw4(agent: &mut L2CAgentBase) {
                 agent.module_accessor,
                 &Vector3f {
                     x: 5.0,
-                    y: 4.0,
+                    y: 0.0,
                     z: -7.0,
                 },
             );
