@@ -13,7 +13,7 @@ use {
 unsafe extern "C" fn reflet_attacks4frame(agent: &mut L2CAgentBase) {
     let slot_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     unsafe {
-        if slot_id == 2|| slot_id == 3 {
+        if slot_id == 3 {
             if MotionModule::motion_kind(agent.module_accessor) == hash40("attack_s4_hold") {
                 ArticleModule::generate_article(
                     agent.module_accessor,
